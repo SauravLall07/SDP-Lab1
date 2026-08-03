@@ -29,11 +29,6 @@ The application persists tasks in a single SQLite table named tasks.
 - created_at: TEXT not null
 - updated_at: TEXT not null
 
-### Business rules
-
-- Tasks are never permanently deleted. They are archived by setting archived_at.
-- Overdue status is derived at read time rather than stored in the database.
-- The repository layer validates status values and required fields before writes.
 
 ## Running It
 
