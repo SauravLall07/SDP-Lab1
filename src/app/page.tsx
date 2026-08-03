@@ -1,9 +1,20 @@
+import { Suspense } from 'react';
 import { getTasks } from '@/lib/db/task-repository';
 import { TaskForm } from '@/components/TaskForm';
 import { TaskList } from '@/components/TaskList';
+import { SortControls } from '@/components/SortControls';
+import { TaskSortField, SortOrder } from '@/lib/types';
 
-export default function HomePage() {
-  const tasks = getTasks({ isArchived: false, sortBy: 'due_date', sortOrder: 'asc' });
+function getSortParams(searchParams: { [key: string]: string | string[] | undefined }) {
+  const sortBy = (searchParams.sortBy as TaskSortField | undefined) ?? 'due_date';
+  const sortOrder = (searchParams.sortOrder as SortOrder | undefined) ?? 'asc';
+  return { sortBy, sortOrder };
+}
+
+export default function HomePage({ searchParams }: { searchParams?: { [key: string]: string | string[] | undefined } }) {
+  const resolvedParams = searchParams ?? {};
+  const { sortBy, sortOrder } = getSortParams(resolvedParams);
+  const tasks = getTasks({ isArchived: false, sortBy, sortOrder });
 
   return (
     <div className="space-y-8">
@@ -15,19 +26,22 @@ export default function HomePage() {
           Manage your tasks with SQLite-backed persistence.
         </h1>
         <p className="max-w-2xl text-lg text-slate-300">
-          Create and review tasks from this page. Everything is stored server-side and reloaded from SQLite on each visit.
+          Create, edit, and sort tasks from this page. Everything is stored server-side and reloaded from SQLite on each visit.
         </p>
       </header>
 
       <TaskForm />
 
       <section className="space-y-4">
-        <div className="flex items-center justify-between gap-3">
+        <div className="flex flex-wrap items-center justify-between gap-3">
           <h2 className="text-2xl font-semibold text-slate-100">Active tasks</h2>
           <span className="rounded-full border border-slate-700 bg-slate-800/70 px-3 py-1 text-sm text-slate-300">
             {tasks.length} item{tasks.length === 1 ? '' : 's'}
           </span>
         </div>
+        <Suspense fallback={null}>
+          <SortControls currentSortBy={sortBy} currentSortOrder={sortOrder} />
+        </Suspense>
         <TaskList tasks={tasks} />
       </section>
     </div>
