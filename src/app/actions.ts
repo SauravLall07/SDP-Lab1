@@ -1,7 +1,7 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { createTask, updateTask } from '@/lib/db/task-repository';
+import { archiveTask, createTask, updateTask } from '@/lib/db/task-repository';
 import { CreateTaskInput } from '@/lib/types';
 
 export async function createTaskAction(formData: FormData): Promise<void> {
@@ -16,6 +16,7 @@ export async function createTaskAction(formData: FormData): Promise<void> {
   try {
     createTask(input);
     revalidatePath('/');
+    revalidatePath('/archived');
   } catch (error) {
     console.error('Failed to create task', error);
   }
@@ -34,11 +35,24 @@ export async function updateTaskAction(formData: FormData): Promise<{ success: b
   try {
     const updatedTask = updateTask(id, input as never);
     revalidatePath('/');
+    revalidatePath('/archived');
     return { success: Boolean(updatedTask) };
   } catch (error) {
     return {
       success: false,
       error: error instanceof Error ? error.message : 'Unable to update task.',
     };
+  }
+}
+
+export async function archiveTaskAction(formData: FormData): Promise<void> {
+  const id = Number(formData.get('id'));
+
+  try {
+    archiveTask(id);
+    revalidatePath('/');
+    revalidatePath('/archived');
+  } catch (error) {
+    console.error('Failed to archive task', error);
   }
 }

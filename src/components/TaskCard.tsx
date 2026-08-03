@@ -1,14 +1,16 @@
 "use client";
 
 import { useState } from 'react';
+import { archiveTaskAction } from '@/app/actions';
 import { Task } from '@/lib/types';
 import { EditTaskModal } from './EditTaskModal';
 
 interface TaskCardProps {
   task: Task;
+  showArchiveButton?: boolean;
 }
 
-export function TaskCard({ task }: TaskCardProps) {
+export function TaskCard({ task, showArchiveButton = true }: TaskCardProps) {
   const [isEditOpen, setIsEditOpen] = useState(false);
 
   const dueLabel = new Date(`${task.due_date}T00:00:00`).toLocaleDateString('en', {
@@ -38,7 +40,7 @@ export function TaskCard({ task }: TaskCardProps) {
           <span className="rounded-full bg-slate-700/80 px-3 py-1">Due: {dueLabel}</span>
         </div>
 
-        <div className="mt-5 flex justify-end">
+        <div className="mt-5 flex flex-wrap justify-end gap-2">
           <button
             type="button"
             onClick={() => setIsEditOpen(true)}
@@ -46,6 +48,17 @@ export function TaskCard({ task }: TaskCardProps) {
           >
             Edit task
           </button>
+          {showArchiveButton ? (
+            <form action={archiveTaskAction}>
+              <input type="hidden" name="id" value={task.id} />
+              <button
+                type="submit"
+                className="rounded-lg border border-amber-600/50 px-3 py-2 text-sm text-amber-300 transition hover:bg-amber-600/10"
+              >
+                Archive task
+              </button>
+            </form>
+          ) : null}
         </div>
       </article>
 
