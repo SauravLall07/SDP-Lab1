@@ -8,16 +8,24 @@ export function Navigation() {
   const isArchived = pathname.startsWith('/archived');
 
   return (
-    <nav className="flex flex-wrap items-center gap-3 rounded-2xl border border-slate-700 bg-slate-800/70 p-3">
+    <nav className="flex items-center gap-1 rounded-lg border border-gray-800 bg-gray-900/30 p-1 backdrop-blur-sm w-fit">
       <Link
         href="/"
-        className={`rounded-lg px-3 py-2 text-sm font-medium transition ${!isArchived ? 'bg-indigo-500 text-white' : 'text-slate-300 hover:bg-slate-700'}`}
+        className={`rounded-md px-4 py-2 text-sm font-medium transition ${
+          !isArchived
+            ? 'bg-green-500 text-black'
+            : 'text-gray-400 hover:text-white hover:bg-gray-800/50'
+        }`}
       >
         Active tasks
       </Link>
       <Link
         href="/archived"
-        className={`rounded-lg px-3 py-2 text-sm font-medium transition ${isArchived ? 'bg-indigo-500 text-white' : 'text-slate-300 hover:bg-slate-700'}`}
+        className={`rounded-md px-4 py-2 text-sm font-medium transition ${
+          isArchived
+            ? 'bg-green-500 text-black'
+            : 'text-gray-400 hover:text-white hover:bg-gray-800/50'
+        }`}
       >
         Archived tasks
       </Link>

@@ -19,26 +19,20 @@ export default function HomePage({ searchParams }: { searchParams?: { [key: stri
 
   return (
     <div className="space-y-8">
-      <Navigation />
-
-      <header className="space-y-3">
-        <p className="text-sm font-medium uppercase tracking-[0.2em] text-indigo-400">
-          Task Manager
-        </p>
-        <h1 className="text-4xl font-bold tracking-tight text-slate-100">
-          Manage your tasks.
-        </h1>
-        <p className="max-w-2xl text-lg text-slate-300">
-          Create, edit, and sort tasks.
-        </p>
-      </header>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-4xl font-bold text-white mb-2">Manage your tasks</h1>
+          <p className="text-gray-400">Create, edit, and sort tasks to stay organized and productive.</p>
+        </div>
+        <Navigation />
+      </div>
 
       <TaskForm />
 
-      <section className="space-y-4">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <h2 className="text-2xl font-semibold text-slate-100">Active tasks</h2>
-          <span className="rounded-full border border-slate-700 bg-slate-800/70 px-3 py-1 text-sm text-slate-300">
+      <section className="space-y-5">
+        <div className="flex items-center justify-between">
+          <h2 className="text-2xl font-bold text-white">Active tasks</h2>
+          <span className="rounded-full border border-gray-700 bg-gray-900/50 px-3 py-1 text-sm text-gray-300">
             {tasks.length} item{tasks.length === 1 ? '' : 's'}
           </span>
         </div>

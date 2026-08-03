@@ -18,20 +18,18 @@ export default function ArchivedPage({ searchParams }: { searchParams?: { [key: 
 
   return (
     <div className="space-y-8">
-      <Navigation />
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-4xl font-bold text-white mb-2">Archived tasks</h1>
+          <p className="text-gray-400">Review work that has been completed and archived. Tasks are never permanently deleted.</p>
+        </div>
+        <Navigation />
+      </div>
 
-      <header className="space-y-3">
-        <p className="text-sm font-medium uppercase tracking-[0.2em] text-indigo-400">Archived tasks</p>
-        <h1 className="text-4xl font-bold tracking-tight text-slate-100">Review your archived work.</h1>
-        <p className="max-w-2xl text-lg text-slate-300">
-          Tasks are never deleted permanently. They remain in the SQLite database with an archive timestamp.
-        </p>
-      </header>
-
-      <section className="space-y-4">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <h2 className="text-2xl font-semibold text-slate-100">Archived tasks</h2>
-          <span className="rounded-full border border-slate-700 bg-slate-800/70 px-3 py-1 text-sm text-slate-300">
+      <section className="space-y-5">
+        <div className="flex items-center justify-between">
+          <h2 className="text-2xl font-bold text-white">Completed work</h2>
+          <span className="rounded-full border border-gray-700 bg-gray-900/50 px-3 py-1 text-sm text-gray-300">
             {tasks.length} item{tasks.length === 1 ? '' : 's'}
           </span>
         </div>

@@ -40,62 +40,66 @@ export function EditTaskModal({ task, onClose }: EditTaskModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/70 px-4">
-      <div className="w-full max-w-xl rounded-2xl border border-slate-700 bg-slate-900 p-6 shadow-xl">
-        <div className="flex items-center justify-between gap-3">
-          <h3 className="text-xl font-semibold text-slate-100">Edit task</h3>
-          <button type="button" onClick={onClose} className="text-sm text-slate-400 hover:text-slate-200">
-            Close
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm px-4">
+      <div className="w-full max-w-xl rounded-lg border border-gray-800 bg-gray-900/95 p-8 shadow-2xl">
+        <div className="flex items-center justify-between gap-3 mb-6">
+          <h3 className="text-xl font-bold text-white">Edit task</h3>
+          <button
+            type="button"
+            onClick={onClose}
+            className="text-gray-400 hover:text-white text-2xl leading-none"
+          >
+            ×
           </button>
         </div>
 
-        <form className="mt-5 space-y-4" onSubmit={handleSubmit}>
-          <label className="flex flex-col gap-2 text-sm text-slate-200">
-            <span>Title</span>
+        <form className="space-y-5" onSubmit={handleSubmit}>
+          <label className="flex flex-col gap-2 text-sm">
+            <span className="font-medium text-gray-300">Title</span>
             <input
               value={title}
               onChange={(event) => setTitle(event.target.value)}
-              className="rounded-lg border border-slate-600 bg-slate-800 px-3 py-2 text-slate-100"
+              className="rounded-lg border border-gray-700 bg-gray-800 px-4 py-2.5 text-white outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500/30 transition"
             />
           </label>
 
-          <label className="flex flex-col gap-2 text-sm text-slate-200">
-            <span>Description</span>
+          <label className="flex flex-col gap-2 text-sm">
+            <span className="font-medium text-gray-300">Description</span>
             <textarea
               value={description}
               onChange={(event) => setDescription(event.target.value)}
               rows={3}
-              className="rounded-lg border border-slate-600 bg-slate-800 px-3 py-2 text-slate-100"
+              className="rounded-lg border border-gray-700 bg-gray-800 px-4 py-2.5 text-white outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500/30 transition resize-none"
             />
           </label>
 
           <div className="grid gap-4 md:grid-cols-2">
-            <label className="flex flex-col gap-2 text-sm text-slate-200">
-              <span>Due date</span>
+            <label className="flex flex-col gap-2 text-sm">
+              <span className="font-medium text-gray-300">Due date</span>
               <input
                 type="date"
                 value={dueDate}
                 onChange={(event) => setDueDate(event.target.value)}
-                className="rounded-lg border border-slate-600 bg-slate-800 px-3 py-2 text-slate-100"
+                className="rounded-lg border border-gray-700 bg-gray-800 px-4 py-2.5 text-white outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500/30 transition"
               />
             </label>
 
-            <label className="flex flex-col gap-2 text-sm text-slate-200">
-              <span>Topic</span>
+            <label className="flex flex-col gap-2 text-sm">
+              <span className="font-medium text-gray-300">Topic</span>
               <input
                 value={topic}
                 onChange={(event) => setTopic(event.target.value)}
-                className="rounded-lg border border-slate-600 bg-slate-800 px-3 py-2 text-slate-100"
+                className="rounded-lg border border-gray-700 bg-gray-800 px-4 py-2.5 text-white outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500/30 transition"
               />
             </label>
           </div>
 
-          <label className="flex flex-col gap-2 text-sm text-slate-200">
-            <span>Status</span>
+          <label className="flex flex-col gap-2 text-sm">
+            <span className="font-medium text-gray-300">Status</span>
             <select
               value={status}
               onChange={(event) => setStatus(event.target.value as TaskStatus)}
-              className="rounded-lg border border-slate-600 bg-slate-800 px-3 py-2 text-slate-100"
+              className="rounded-lg border border-gray-700 bg-gray-800 px-4 py-2.5 text-white outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500/30 transition"
             >
               <option value="Todo">Todo</option>
               <option value="In-Progress">In-Progress</option>
@@ -103,13 +107,20 @@ export function EditTaskModal({ task, onClose }: EditTaskModalProps) {
             </select>
           </label>
 
-          {error ? <p className="text-sm text-rose-400">{error}</p> : null}
+          {error ? <p className="text-sm text-red-400 bg-red-500/10 border border-red-500/30 rounded-lg p-3">{error}</p> : null}
 
-          <div className="flex justify-end gap-3">
-            <button type="button" onClick={onClose} className="rounded-lg border border-slate-600 px-4 py-2 text-slate-200">
+          <div className="flex justify-end gap-3 pt-2">
+            <button
+              type="button"
+              onClick={onClose}
+              className="rounded-lg border border-gray-700 px-4 py-2.5 text-sm text-gray-300 transition hover:bg-gray-800 hover:border-gray-600"
+            >
               Cancel
             </button>
-            <button type="submit" className="rounded-lg bg-indigo-500 px-4 py-2 font-medium text-white">
+            <button
+              type="submit"
+              className="rounded-lg bg-green-500 px-4 py-2.5 text-sm font-semibold text-black transition hover:bg-green-400 active:bg-green-600"
+            >
               Save changes
             </button>
           </div>

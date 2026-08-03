@@ -10,14 +10,14 @@ interface TaskListProps {
 export function TaskList({ tasks, emptyMessage, showArchiveButton = true }: TaskListProps) {
   if (tasks.length === 0) {
     return (
-      <div className="rounded-2xl border border-dashed border-slate-700 bg-slate-800/50 p-10 text-center text-slate-400">
+      <div className="rounded-lg border border-dashed border-gray-700 bg-gray-900/20 p-12 text-center text-gray-500">
         {emptyMessage ?? 'No active tasks yet. Create one above to get started.'}
       </div>
     );
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       {tasks.map((task) => (
         <TaskCard key={task.id} task={task} showArchiveButton={showArchiveButton} />
       ))}
