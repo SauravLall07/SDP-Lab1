@@ -36,6 +36,11 @@ The application persists tasks in a single SQLite table named tasks.
 
 - Node.js 20 or newer
 - npm
+### Clone the repository
+```bash
+git clone https://github.com/SauravLall07/SDP-Lab1
+cd SDP-Lab1
+```
 
 ### Install dependencies
 
